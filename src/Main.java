@@ -1,3 +1,6 @@
+import entities.Employee;
+import services.SalaryService;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,8 +15,14 @@ public class Main {
         System.out.print("Salario bruto: ");
         double grossSalary = sc.nextDouble();
 
-        double netSalary = grossSalary * 0.7;
+        Employee employee = new Employee(name, grossSalary);
+
+        SalaryService salaryService = new SalaryService();
+
+        double netSalary = salaryService.netSalary(employee);
         System.out.printf("Salario liquido = %.2f%n", netSalary);
+
         sc.close();
+
     }
 }
