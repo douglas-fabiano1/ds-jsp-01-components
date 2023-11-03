@@ -1,5 +1,7 @@
 import entities.Employee;
+import services.PensionService;
 import services.SalaryService;
+import services.TaxService;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -12,15 +14,18 @@ public class Main {
 
         System.out.print("Nome: ");
         String name = sc.nextLine();
-        System.out.print("Salario bruto: ");
+        System.out.print("Salário bruto: ");
         double grossSalary = sc.nextDouble();
 
         Employee employee = new Employee(name, grossSalary);
 
-        SalaryService salaryService = new SalaryService();
+        // Instantiation
+        TaxService taxService = new TaxService();
+        PensionService pensionService = new PensionService();
+        SalaryService salaryService = new SalaryService(taxService, pensionService);
 
         double netSalary = salaryService.netSalary(employee);
-        System.out.printf("Salario liquido = %.2f%n", netSalary);
+        System.out.printf("Salário líquido = %.2f%n", netSalary);
 
         sc.close();
 
